@@ -1,3 +1,4 @@
+from rest_framework import viewsets
 from rest_framework import generics, status
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
@@ -85,3 +86,10 @@ class CreateVote(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# step 5, Using Viewset
+
+class PollViewSet(viewsets.ModelViewSet):
+    queryset = Poll.objects.all()
+    serializer_class = PollSerializer
